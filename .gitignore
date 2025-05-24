@@ -1,8 +1,0 @@
-# Ignore the dataset folder
-dataset/
-
-# Ignore virtual environment folder
-.venv/
-
-# Ignore Jupyter notebook checkpoints
-.ipynb_checkpoints/

@@ -32,8 +32,8 @@ def preprocess_image(image, target_size=(224, 224)):
 
 # Main app
 def main():
-    st.title("Bruise Detection System")
-    st.write("Upload an image to detect if it shows a bruise")
+    st.title("Bruise vs Normal Skin Detection")
+    st.write("Upload an image to detect if it shows a bruise or normal skin")
     
     # File uploader
     uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
@@ -62,18 +62,27 @@ def main():
                 col1, col2 = st.columns(2)
                 
                 with col1:
-                    result = "Bruise" if probability > 0.5 else "No Bruise"
+                    result = "Bruise" if probability > 0.5 else "Normal Skin"
                     st.metric("Prediction", result)
                 
                 with col2:
                     confidence = probability if probability > 0.5 else 1 - probability
                     st.metric("Confidence", f"{confidence*100:.2f}%")
                 
-                # Display probability bar
+                # Display probability distribution
                 st.subheader("Probability Distribution:")
-                st.progress(probability)
-                st.write(f"Bruise Probability: {probability*100:.2f}%")
-                st.write(f"No Bruise Probability: {(1-probability)*100:.2f}%")
+                
+                # Create two bars for bruise and normal probabilities
+                bruise_prob = probability
+                normal_prob = 1 - probability
+                
+                st.write("Bruise Probability:")
+                st.progress(bruise_prob)
+                st.write(f"{bruise_prob*100:.2f}%")
+                
+                st.write("Normal Skin Probability:")
+                st.progress(normal_prob)
+                st.write(f"{normal_prob*100:.2f}%")
 
 if __name__ == "__main__":
     main()
