@@ -1,1 +1,29 @@
-model/*
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+.venv
+venv/
+
+# Model files
+models/*.h5
+models/*.pth
+models/*.onnx
+models/*.pb
+models/*.tflite
+
+# Dataset
+dataset/
+
+# IDE
+.vscode/
+.idea/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
