@@ -7,3 +7,6 @@ streamlit
 kaggle
 notebook
 ipykernel
+seaborn
+
+

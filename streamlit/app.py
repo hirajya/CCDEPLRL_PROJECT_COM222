@@ -22,18 +22,28 @@ def load_model():
 
 # Image preprocessing function
 def preprocess_image(image, target_size=(224, 224)):
+    # Ensure image is in RGB
+    if image.mode != 'RGB':
+        image = image.convert('RGB')
+    
     # Resize image
     img = image.resize(target_size)
+    
     # Convert to array and normalize
     img_array = np.array(img) / 255.0
+    
+    # Ensure we have the right shape (224, 224, 3)
+    if len(img_array.shape) == 2:
+        img_array = np.stack((img_array,)*3, axis=-1)
+    
     # Add batch dimension
     img_array = np.expand_dims(img_array, axis=0)
     return img_array
 
 # Main app
 def main():
-    st.title("Bruise vs Normal Skin Detection")
-    st.write("Upload an image to detect if it shows a bruise or normal skin")
+    st.title("Bruise Detection System")
+    st.write("Upload an image to detect if it shows a bruise")
     
     # File uploader
     uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
@@ -52,9 +62,9 @@ def main():
                 # Preprocess the image
                 processed_img = preprocess_image(image)
                 
-                # Get prediction
+                # Get prediction and convert to native Python float
                 prediction = model.predict(processed_img)
-                probability = prediction[0][0]
+                probability = float(prediction[0][0])  # Convert from float32 to float
                 
                 # Display results
                 st.subheader("Detection Results:")
@@ -73,8 +83,9 @@ def main():
                 st.subheader("Probability Distribution:")
                 
                 # Create two bars for bruise and normal probabilities
-                bruise_prob = probability
-                normal_prob = 1 - probability
+                # Convert probabilities to native Python float
+                bruise_prob = float(probability)
+                normal_prob = float(1 - probability)
                 
                 st.write("Bruise Probability:")
                 st.progress(bruise_prob)
