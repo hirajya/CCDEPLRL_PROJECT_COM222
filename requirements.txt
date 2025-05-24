@@ -1,0 +1,9 @@
+tensorflow
+numpy
+pillow
+matplotlib
+scikit-learn
+streamlit
+kaggle
+notebook
+ipykernel
