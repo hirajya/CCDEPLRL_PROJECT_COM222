@@ -13,7 +13,9 @@ st.set_page_config(
 # Model loading function
 @st.cache_resource
 def load_model():
-    model_path = os.path.join('..', 'models', 'baseline_model.h5')
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    model_path = os.path.abspath(os.path.join(BASE_DIR, "../models/baseline_model.h5"))
+
     if os.path.exists(model_path):
         return tf.keras.models.load_model(model_path)
     else:
