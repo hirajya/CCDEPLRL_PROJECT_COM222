@@ -13,7 +13,7 @@ st.set_page_config(
 # Model loading function
 @st.cache_resource
 def load_model():
-    model_path = os.path.join('..', 'models', 'bruise_detection_model.h5')
+    model_path = os.path.join('..', 'models', 'baseline_model.h5')
     if os.path.exists(model_path):
         return tf.keras.models.load_model(model_path)
     else:
