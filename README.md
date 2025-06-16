@@ -100,7 +100,7 @@ Streamlit
 ### Installation
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/bruise-detection-cnn.git
+git clone https://github.com/hirajya/bruise-detection-cnn.git
 cd bruise-detection-cnn
 
 # Install dependencies
